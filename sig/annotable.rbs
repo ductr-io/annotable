@@ -1,4 +1,161 @@
+# 
+# Annotable is a module that can extend any class or module to add the ability to annotate its methods.
+# 
+#   class Needy
+#     extend Annotable # Extend your class or module with Annotable
+#     annotable :my_annotation, :my_other_annotation # Declare your annotations
+# 
+#     my_annotation 42, hello: "world!" # Annotate your methods
+#     def method_needing_meta_data
+#       # ...
+#     end
+# 
+#     def regular_method
+#       # ...
+#     end
+#   end
+# 
+# `Annotable` adds several methods to your class or module, providing access to annotations and their metadata:
+# 
+#   Needy.annotated_method_exist? :method_needing_meta_data # => true
+#   Needy.annotated_method_exist? :regular_method # => false
+#   Needy.annotated_methods
+#   # => [#<Annotable::Method
+#   #   @annotations=[
+#   #     #<Annotable::Annotation
+#   #       @name=:my_annotation,
+#   #       @options={:hello=>"world!"},
+#   #       @params=[42]>
+#   #   ],
+#   #   @name=:method_needing_meta_data>
+#   # ]
+# 
+# `Annotable::Method` represents a method name along with its annotations:
+# 
+#   method = Needy.annotated_methods.first
+#   method.name # => :method_needing_meta_data
+#   method.annotations
+#   # => [
+#   #   #<Annotable::Annotation
+#   #     @name=:my_annotation,
+#   #     @options={:hello=>"world!"},
+#   #     @params=[42]>
+#   # ]
+# 
+# `Annotable::Annotation` contains annotation's name and metadata:
+# 
+#   annotation = method.annotations.first
+#   annotation.name # => :my_annotation
+#   annotation.params # => [42]
+#   annotation.options # => {:hello => "world!"}
 module Annotable
   VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+
+  # Declares annotations usable in the module or class.
+  # 
+  #   annotable :my_annotation, :my_other_annotation
+  # 
+  # This will generate two class methods named after the given symbols.
+  # These methods, will push a new `Annotation` in the `current_annotation` array.
+  # 
+  # _@param_ `annotation_names` — The names of annotations to declare
+  def annotable: (*::Array[Symbol] annotation_names) -> void
+
+  # Return all annotated methods or those matching the given annotation names.
+  # 
+  # _@param_ `names` — The annotation names to find
+  # 
+  # _@return_ — The annotated methods
+  def annotated_methods: (*::Array[Symbol] names) -> ::Array[Annotable::Method]
+
+  # Check if an annotated method exists based in its name.
+  # 
+  # _@param_ `name` — The name to check
+  # 
+  # _@return_ — True if the annotated method exists, false otherwise
+  def annotated_method_exist?: (Symbol name) -> bool
+
+  # A callback called by Ruby when a method is added into the class or module.
+  # 
+  # _@param_ `name` — The name of the created method
+  def method_added: (Symbol name) -> void
+
+  # Remove an annotated method based on its name.
+  # 
+  # _@param_ `name` — The name of the method to delete
+  def remove_annotated_method: (Symbol name) -> void
+
+  # Annotation found for the current method declaration.
+  # 
+  # _@return_ — The annotations for the current method declaration
+  def current_annotations: () -> ::Array[Annotable::Annotation]
+
+  # Empty the current annotation array.
+  def reset_current_annotations: () -> void
+
+  # 
+  # An annotated method with its annotations.
+  # 
+  #   one = Annotation.new(:one)
+  #   two = Annotation.new(:two)
+  #   some_method = Method.new(:some_method, one, two)
+  # 
+  #   some_method.annotation_exist?(:one) # => true
+  #   some_method.annotation_exist?(:no) # => false
+  #   some_method.select_annotations(:one) # => [#<Annotable::Annotation @name=:one, @options={}, @params=[]>]
+  class Method
+    # Creates a new annotated method.
+    # 
+    # _@param_ `name` — The method name
+    # 
+    # _@param_ `annotations` — The annotations linked to this method
+    def initialize: (Symbol name, *::Array[Annotation] annotations) -> void
+
+    # Determines whether annotation exists based on its name.
+    # 
+    # _@param_ `name` — The annotation's name to check for
+    # 
+    # _@return_ — True if the annotation exists, false otherwise
+    def annotation_exist?: (Symbol name) -> bool
+
+    # Returns all annotations matching the given names.
+    # 
+    # _@param_ `names` — Names of the annotations to select
+    # 
+    # _@return_ — The matching annotations
+    def select_annotations: (*::Array[Symbol] names) -> ::Array[Annotation]
+
+    # _@return_ — The method name
+    attr_reader name: Symbol
+
+    # _@return_ — The annotations declared for this method
+    attr_reader annotations: ::Array[Annotation]
+  end
+
+  # 
+  # Encapsulates annotation data: name, params & options.
+  # 
+  #   my_annotation = Annotation.new(:name, ["some", "params"], {some: "options"})
+  #   my_annotation.name # => :name
+  #   my_annotation.params # => ["some", "params"]
+  #   my_annotation.options # => {some: "options"}
+  class Annotation
+    # Creates an new annotation.
+    # 
+    # _@param_ `name` — The annotation's name
+    # 
+    # _@param_ `params` — The annotation's params
+    # 
+    # _@param_ `options` — The annotation's options
+    def initialize: (Symbol name, ?::Array[Object] params, ?::Hash[Symbol, Object] options) -> void
+
+    # _@return_ — The annotation's name
+    attr_reader name: Symbol
+
+    # _@return_ — The annotation's params
+    attr_reader params: ::Array[Object]
+
+    # _@return_ — The annotaion's options
+    attr_reader options: ::Hash[Symbol, Object]
+  end
 end

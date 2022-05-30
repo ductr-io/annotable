@@ -2,11 +2,8 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in annotable.gemspec
+# Specify all your gem's dependencies in annotable.gemspec
 gemspec
 
-gem "rake", "~> 13.0"
-
-gem "rspec", "~> 3.0"
-
-gem "rubocop", "~> 1.21"
+# TODO: Remove this when sord will have a new release on rubygems.org.
+gem "sord", git: "https://github.com/AaronC81/sord", branch: "master"

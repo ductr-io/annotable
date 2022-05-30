@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
-require "annotable"
+require "simplecov"
+SimpleCov.start do
+  load_profile "test_frameworks"
+  add_filter "version"
+  track_files "lib/**/*.rb"
+end
 
+require "annotable"
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
