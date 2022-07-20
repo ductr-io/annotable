@@ -1,18 +1,7 @@
-GIT
-  remote: https://github.com/AaronC81/sord
-  revision: 25c77951f8d20f73ad336e5d0eb13d0eaad14200
-  branch: master
-  specs:
-    sord (3.0.1)
-      commander (~> 4.5)
-      parlour (~> 5.0)
-      sorbet-runtime
-      yard
-
 PATH
   remote: .
   specs:
-    annotable (0.1.0)
+    annotable (0.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -68,10 +57,15 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    sorbet-runtime (0.5.10037)
+    sorbet-runtime (0.5.10184)
+    sord (4.0.0)
+      commander (~> 4.5)
+      parlour (~> 5.0)
+      sorbet-runtime
+      yard
     unicode-display_width (2.1.0)
     webrick (1.7.0)
-    yard (0.9.27)
+    yard (0.9.28)
       webrick (~> 1.7.0)
 
 PLATFORMS
@@ -84,7 +78,7 @@ DEPENDENCIES
   rubocop (~> 1.29)
   rubocop-rspec (~> 2.11)
   simplecov (~> 0.21)
-  sord!
+  sord (~> 4.0)
 
 BUNDLED WITH
    2.3.7
