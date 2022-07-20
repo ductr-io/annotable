@@ -14,7 +14,7 @@ module Annotable
     attr_reader :name
     # @return [Array<Object>] The annotation's params
     attr_reader :params
-    # @return [Hash<Symbol, Object>] The annotaion's options
+    # @return [Hash<Symbol, Object>] The annotation's options
     attr_reader :options
 
     #

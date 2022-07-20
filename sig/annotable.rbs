@@ -155,7 +155,7 @@ module Annotable
     # _@return_ — The annotation's params
     attr_reader params: ::Array[Object]
 
-    # _@return_ — The annotaion's options
+    # _@return_ — The annotation's options
     attr_reader options: ::Hash[Symbol, Object]
   end
 end
