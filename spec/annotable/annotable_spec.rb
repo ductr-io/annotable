@@ -56,13 +56,6 @@ RSpec.describe Annotable do
       dummy_class.instance_variable_set(:@annotated_methods, [method_double])
     end
 
-    it "sets an empty array" do
-      dummy_class.instance_variable_set(:@annotated_methods, nil)
-      dummy_class.annotated_methods
-
-      expect(dummy_class.instance_variable_get(:@annotated_methods)).to eq([])
-    end
-
     context "when no name is given" do
       it "returns all annotated methods" do
         dummy_class.instance_variable_set(:@annotated_methods, [42])

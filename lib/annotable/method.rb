@@ -56,5 +56,20 @@ module Annotable
         names.include? a.name
       end
     end
+
+    #
+    # Finds the first annotation matching one of the given names.
+    #
+    # @param [Array<Symbol>] *names The annotation names to find
+    #
+    # @return [Annotation] The matching annotation
+    #
+    def find_annotation(*names)
+      raise ArgumentError, "You must provide at least one name to find" if names.empty?
+
+      annotations.find do |a|
+        names.include? a.name
+      end
+    end
   end
 end

@@ -53,7 +53,7 @@ RSpec.describe Annotable::Method do
     end
 
     context "when the names exists" do
-      it "returns the mathing annotations" do
+      it "returns the matching annotations" do
         expect(method.select_annotations(*annotation_names)).to eq(annotations)
       end
     end
@@ -61,6 +61,26 @@ RSpec.describe Annotable::Method do
     context "when the names doesn't exists" do
       it "returns an empty array" do
         expect(method.select_annotations(:nope)).to eq([])
+      end
+    end
+  end
+
+  describe "#find_annotation" do
+    context "without param" do
+      it "raises an ArgumentError" do
+        expect { method.find_annotation }.to raise_error(ArgumentError)
+      end
+    end
+
+    context "when the names exists" do
+      it "returns the matching annotation" do
+        expect(method.find_annotation(*annotation_names)).to eq(annotations.first)
+      end
+    end
+
+    context "when the names doesn't exists" do
+      it "returns an empty array" do
+        expect(method.find_annotation(:nope)).to be_nil
       end
     end
   end

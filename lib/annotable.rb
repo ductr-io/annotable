@@ -86,7 +86,7 @@ module Annotable
   # @return [Array<Annotable::Method>] The annotated methods
   #
   def annotated_methods(*names)
-    @annotated_methods ||= []
+    # Ractor.make_shareable(@annotated_methods)
 
     return @annotated_methods if @annotated_methods.empty? || names.empty?
 
@@ -110,6 +110,8 @@ module Annotable
   # @return [Boolean] True if the annotated method exists, false otherwise
   #
   def annotated_method_exist?(name)
+    # return false unless @annotated_methods
+
     !annotated_methods.find { |am| am.name == name }.nil?
   end
 
@@ -124,6 +126,7 @@ module Annotable
   #
   def method_added(name)
     super
+    @annotated_methods ||= []
     return if current_annotations.empty?
 
     remove_annotated_method(name) if annotated_method_exist?(name)
