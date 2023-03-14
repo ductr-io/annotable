@@ -8,17 +8,18 @@ Gem::Specification.new do |spec|
   spec.authors = ["Mathieu MOREL"]
   spec.email = ["mathieu@lamanufacture.dev"]
 
-  spec.summary = "A simple method annotation gem"
+  spec.summary = "A simple zero-dependency method annotation gem"
   spec.description = "Provides a simple way to add annotations to your method declarations."
-  spec.homepage = "https://gitlab.com/la-manufacture/rocket/annotable"
-  spec.license = "MIT"
+  spec.homepage = "https://github.com/ductr-io/annotable"
+  spec.license = "LGPL-3.0-or-later"
   spec.required_ruby_version = ">= 3.1.0"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
-  spec.metadata["changelog_uri"] = "#{spec.homepage}/-/releases"
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/releases"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

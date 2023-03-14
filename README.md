@@ -88,8 +88,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitLab at https://gitlab.com/la-manufacture/rocket/annotable.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ductr-io/annotable.
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [LGPLv3 or later](https://opensource.org/license/lgpl-3-0/).

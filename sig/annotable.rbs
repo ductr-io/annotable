@@ -125,6 +125,13 @@ module Annotable
     # _@return_ — The matching annotations
     def select_annotations: (*::Array[Symbol] names) -> ::Array[Annotation]
 
+    # Finds the first annotation matching one of the given names.
+    # 
+    # _@param_ `*names` — The annotation names to find
+    # 
+    # _@return_ — The matching annotation
+    def find_annotation: (*::Array[Symbol] names) -> Annotation
+
     # _@return_ — The method name
     attr_reader name: Symbol
 
