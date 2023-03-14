@@ -7,7 +7,7 @@ Annotable is a module that can extend any class or module to add the ability to 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'annotable'
+gem "annotable"
 ```
 
 And then execute:
